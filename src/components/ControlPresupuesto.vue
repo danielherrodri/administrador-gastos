@@ -1,6 +1,6 @@
 <script setup>
 import imagen from "../assets/img/grafico.jpg";
-import Presupuesto from "./Presupuesto.vue";
+import { formatearCantidad } from "../helpers";
 const props = defineProps({
   presupuesto: {
     type: Number,
@@ -21,8 +21,8 @@ const props = defineProps({
 
     <div class="contenedor-presupuesto">
       <button class="reset-app">Resetear App</button>
-      <p><span>Presupuesto:</span>${{ presupuesto }}</p>
-      <p><span>Disponible:</span>${{ disponible }}</p>
+      <p><span>Presupuesto:</span>{{ formatearCantidad(presupuesto) }}</p>
+      <p><span>Disponible:</span>{{ formatearCantidad(disponible) }}</p>
       <p><span>Gastado:</span>$0</p>
     </div>
   </div>
