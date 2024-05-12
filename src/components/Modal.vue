@@ -3,6 +3,12 @@ import cerrarModal from '../assets/img/cerrar.svg';
 
 
 const emit = defineEmits(['ocultar-modal']);
+const props = defineProps({
+    modal: {
+        type: Object,
+        required: true
+    }
+})
 </script>
 
 <template>
@@ -11,7 +17,7 @@ const emit = defineEmits(['ocultar-modal']);
             <img :src="cerrarModal" alt="Cerrar Modal" @click="$emit('ocultar-modal')">
         </div>
 
-        <div class="contenedor">
+        <div class="contenedor contenedor-formulario" :class="[modal.animar ? 'animar': 'cerrar']">
             <form class="nuevo-gasto">
                 <legend>Añadir Gasto</legend>
                 <div class="campo">
@@ -63,34 +69,54 @@ const emit = defineEmits(['ocultar-modal']);
     cursor: pointer;
 }
 
+.contenedor-formulario {
+    transition-property: all;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in;
+    opacity: 0;
+}
+
+.contenedor-formulario.animar {
+    opacity: 1;
+}
+
+.contenedor-formulario.cerrar {
+    opacity: 0;
+}
+
 .nuevo-gasto {
     margin: 10rem auto 0 auto;
     display: grid;
     gap: 2rem;
 }
-.nuevo-gasto legend{
+
+.nuevo-gasto legend {
     text-align: center;
     color: var(--blanco);
     font-size: 3rem;
     font-weight: 700;
 }
+
 .campo {
     display: grid;
     gap: 2rem;
 }
+
 .nuevo-gasto input,
-.nuevo-gasto select{
+.nuevo-gasto select {
     background-color: var(--gris-claro);
     border-radius: 1rem;
     padding: 1rem;
     border: none;
     font-size: 2.2rem;
 }
-.nuevo-gasto label{
+
+.nuevo-gasto label {
     color: var(--blanco);
     font-size: 3rem;
 }
-.nuevo-gasto input[type="submit"]{
+
+.nuevo-gasto input[type="submit"] {
     background-color: var(--azul);
     color: var(--blanco);
     font-weight: 700;
