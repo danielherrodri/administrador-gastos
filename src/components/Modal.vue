@@ -7,7 +7,19 @@ const props = defineProps({
     modal: {
         type: Object,
         required: true
-    }
+    },
+    nombre: {
+        type: String,
+        required: true
+    },
+    cantidad: {
+        type: [String, Number],
+        required: true
+    },
+    categoria: {
+        type: String,
+        required: true
+    },
 })
 </script>
 
@@ -17,20 +29,20 @@ const props = defineProps({
             <img :src="cerrarModal" alt="Cerrar Modal" @click="$emit('ocultar-modal')">
         </div>
 
-        <div class="contenedor contenedor-formulario" :class="[modal.animar ? 'animar': 'cerrar']">
+        <div class="contenedor contenedor-formulario" :class="[modal.animar ? 'animar' : 'cerrar']">
             <form class="nuevo-gasto">
                 <legend>Añadir Gasto</legend>
                 <div class="campo">
                     <label for="nombre">Nombre Gasto:</label>
-                    <input type="text" id="nombre" placeholder="Añade el nombre del gasto">
+                    <input type="text" id="nombre" :value="nombre" placeholder="Añade el nombre del gasto">
                 </div>
                 <div class="campo">
                     <label for="cantidad">Cantidad:</label>
-                    <input type="number" id="cantidad" placeholder="Añade la cantidad del gasto">
+                    <input type="number" id="cantidad" :value="cantidad" placeholder="Añade la cantidad del gasto">
                 </div>
                 <div class="campo">
                     <label for="categoria">Categoría:</label>
-                    <select name="categoria" id="categoria">
+                    <select name="categoria" :value="categoria" id="categoria">
                         <option value="">-- Seleccione --</option>
                         <option value="ahorro">Ahorro</option>
                         <option value="comida">Comida</option>
