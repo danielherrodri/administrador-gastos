@@ -2,6 +2,7 @@
 import Presupuesto from "./components/Presupuesto.vue";
 import { ref } from "vue";
 import ControlPresupuesto from "./components/ControlPresupuesto.vue";
+import iconoNuevoGasto from './assets/img/nuevo-gasto.svg'
 
 const presupuesto = ref(0);
 const disponible = ref(0);
@@ -17,17 +18,16 @@ const definirPresupuesto = (cantidad) => {
     <Header>
       <h1>Planificador de gastos</h1>
       <div class="contenedor-header contenedor sombra">
-        <Presupuesto
-          v-if="presupuesto === 0"
-          @definir-presupuesto="definirPresupuesto"
-        />
-        <ControlPresupuesto
-          v-else
-          :presupuesto="presupuesto"
-          :disponible="disponible"
-        />
+        <Presupuesto v-if="presupuesto === 0" @definir-presupuesto="definirPresupuesto" />
+        <ControlPresupuesto v-else :presupuesto="presupuesto" :disponible="disponible" />
       </div>
     </Header>
+
+    <main v-if="presupuesto > 0">
+      <div class="crear-gasto">
+        <img :src="iconoNuevoGasto" alt="Gasto">
+      </div>
+    </main>
   </div>
 </template>
 
@@ -45,6 +45,7 @@ html {
   font-size: 62.5%;
   box-sizing: border-box;
 }
+
 *,
 *:before,
 *:after {
@@ -75,20 +76,34 @@ header h1 {
   color: var(--blanco);
   text-align: center;
 }
+
 .contenedor {
   width: 90%;
   max-width: 80rem;
   margin: 0 auto;
 }
+
 .contenedor-header {
   margin-top: -5rem;
   transform: translateY(5rem);
   padding: 5rem;
 }
+
 .sombra {
   box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
   background-color: var(--blanco);
   border-radius: 1.2rem;
   padding: 5rem;
+}
+
+.crear-gasto {
+  position: fixed;
+  bottom: 5rem;
+  right: 5rem;
+}
+
+.crear-gasto img {
+  width: 5rem;
+  cursor: pointer;
 }
 </style>
