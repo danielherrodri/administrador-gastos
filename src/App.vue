@@ -3,6 +3,7 @@ import Presupuesto from "./components/Presupuesto.vue";
 import { ref, reactive } from "vue";
 import ControlPresupuesto from "./components/ControlPresupuesto.vue";
 import Modal from './components/Modal.vue';
+import { generarId } from "./helpers";
 import iconoNuevoGasto from './assets/img/nuevo-gasto.svg'
 
 const modal = reactive({
@@ -44,8 +45,8 @@ const ocultarModal = () => {
 
 const guardarGasto = () => {
   gastos.value.push({
-    id: 123,
-    ...gasto
+    ...gasto,
+    id: generarId()
   })
 }
 </script>
