@@ -10,6 +10,10 @@ const props = defineProps({
     type: Number,
     required: true,
   },
+  gastado: {
+    type: Number,
+    required: true
+  }
 });
 </script>
 
@@ -23,7 +27,7 @@ const props = defineProps({
       <button class="reset-app">Resetear App</button>
       <p><span>Presupuesto:</span>{{ formatearCantidad(presupuesto) }}</p>
       <p><span>Disponible:</span>{{ formatearCantidad(disponible) }}</p>
-      <p><span>Gastado:</span>$0</p>
+      <p><span>Gastado:</span>{{ formatearCantidad(gastado) }}</p>
     </div>
   </div>
 </template>
@@ -34,7 +38,7 @@ const props = defineProps({
   flex-direction: column;
 }
 
-.dos-columnas > :first-child {
+.dos-columnas> :first-child {
   margin-bottom: 3rem;
 }
 
@@ -77,9 +81,11 @@ const props = defineProps({
     gap: 4rem;
     align-items: center;
   }
-  .dos-columnas > :first-child {
+
+  .dos-columnas> :first-child {
     margin-bottom: 0;
   }
+
   .contenedor-presupuesto p {
     text-align: left;
   }
