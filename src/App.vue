@@ -16,6 +16,7 @@ const gastos = ref([]);
 watch(gastos, () => {
   const totalGastado = gastos.value.reduce((total, gasto) => gasto.cantidad + total, 0);
   gastado.value = totalGastado;
+  disponible.value = presupuesto.value - totalGastado;
 }, {
   deep: true
 })
