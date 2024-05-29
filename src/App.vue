@@ -13,6 +13,11 @@ const gastado = ref(0);
 
 const gastos = ref([]);
 
+const modal = reactive({
+  mostrar: false,
+  animar: false
+});
+
 watch(gastos, () => {
   const totalGastado = gastos.value.reduce((total, gasto) => gasto.cantidad + total, 0);
   gastado.value = totalGastado;
@@ -21,10 +26,13 @@ watch(gastos, () => {
   deep: true
 })
 
-const modal = reactive({
-  mostrar: false,
-  animar: false
-});
+watch(modal, () => {
+  if (!modal.mostrar) {
+    reiniciarStatetGasto()
+  }
+}, {
+  deep: true
+})
 
 const gasto = reactive({
   nombre: '',
@@ -61,6 +69,16 @@ const guardarGasto = () => {
 
   ocultarModal();
 
+  reiniciarStatetGasto()
+}
+
+const seleccionarGasto = (id) => {
+  const gastoEditar = gastos.value.filter(gasto => gasto.id === id)[0]
+  Object.assign(gasto, gastoEditar)
+  mostrarModal()
+}
+
+const reiniciarStatetGasto = () => {
   //Reiniciar el objeto
   Object.assign(gasto, {
     nombre: '',
@@ -69,12 +87,6 @@ const guardarGasto = () => {
     id: null,
     fecha: Date.now()
   })
-}
-
-const seleccionarGasto = (id) => {
-  const gastoEditar = gastos.value.filter(gasto => gasto.id === id)[0]
-  Object.assign(gasto, gastoEditar)
-  mostrarModal()
 }
 </script>
 
