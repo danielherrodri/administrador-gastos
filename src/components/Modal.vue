@@ -92,7 +92,7 @@ const agregarGasto = () => {
 
         <div class="contenedor contenedor-formulario" :class="[modal.animar ? 'animar' : 'cerrar']">
             <form class="nuevo-gasto" @submit.prevent="agregarGasto">
-                <legend>Añadir Gasto</legend>
+                <legend>{{ id ? 'Guardar Cambios' : 'Añadir Gasto' }}</legend>
                 <Alerta v-if="error">{{ error }}</Alerta>
                 <div class="campo">
                     <label for="nombre">Nombre Gasto:</label>
@@ -119,7 +119,7 @@ const agregarGasto = () => {
                         <option value="suscripciones">Suscripciones</option>
                     </select>
                 </div>
-                <input type="submit" value="Añadir Gasto">
+                <input type="submit" :value="[id ? 'Guardar Cambios' : 'Añadir Gasto']">
             </form>
         </div>
     </div>
