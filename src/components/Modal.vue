@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import Alerta from './Alerta.vue';
 import cerrarModal from '../assets/img/cerrar.svg';
 
@@ -36,6 +36,10 @@ const props = defineProps({
 })
 
 const old = props.cantidad;
+
+const isEditing = computed(() => {
+    return props.id
+})
 
 const agregarGasto = () => {
     const { cantidad, categoria, nombre, disponible, id } = props;
@@ -92,7 +96,7 @@ const agregarGasto = () => {
 
         <div class="contenedor contenedor-formulario" :class="[modal.animar ? 'animar' : 'cerrar']">
             <form class="nuevo-gasto" @submit.prevent="agregarGasto">
-                <legend>{{ id ? 'Guardar Cambios' : 'Añadir Gasto' }}</legend>
+                <legend>{{ isEditing ? 'Guardar Cambios' : 'Añadir Gasto' }}</legend>
                 <Alerta v-if="error">{{ error }}</Alerta>
                 <div class="campo">
                     <label for="nombre">Nombre Gasto:</label>
@@ -119,14 +123,27 @@ const agregarGasto = () => {
                         <option value="suscripciones">Suscripciones</option>
                     </select>
                 </div>
-                <input type="submit" :value="[id ? 'Guardar Cambios' : 'Añadir Gasto']">
+                <input type="submit" :value="[isEditing ? 'Guardar Cambios' : 'Añadir Gasto']">
             </form>
+            <button type="button" class="btn-eliminar" v-if="isEditing">Eliminar Gasto</button>
         </div>
     </div>
 </template>
 
 
 <style lang="scss" scoped>
+.btn-eliminar {
+    border: none;
+    padding: 1rem;
+    width: 100%;
+    background-color: #EF4444;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--blanco);
+    margin-top: 10rem;
+    cursor: pointer;
+}
+
 .modal {
     position: absolute;
     background-color: rgb(0 0 0 / 0.9);
