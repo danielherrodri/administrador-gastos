@@ -119,7 +119,7 @@ const reiniciarStatetGasto = () => {
       </div>
       <Modal v-if="modal.mostrar" @ocultar-modal="ocultarModal" @guardar-gasto="guardarGasto" :modal="modal"
         v-model:nombre="gasto.nombre" v-model:cantidad="gasto.cantidad" v-model:categoria="gasto.categoria"
-        :disponible="disponible" />
+        :disponible="disponible" :id="gasto.id" />
     </main>
   </div>
 </template>
