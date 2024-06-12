@@ -131,6 +131,13 @@ const gastosFiltrados = computed(() => {
   }
   return gastos.value;
 })
+
+const resetApp = () => {
+  if (confirm('¿Deseas reiniciar presupuestos y gastos?')) {
+    gastos.value = [];
+    presupuesto.value = 0;
+  }
+}
 </script>
 
 <template>
@@ -139,7 +146,8 @@ const gastosFiltrados = computed(() => {
       <h1>Planificador de gastos</h1>
       <div class="contenedor-header contenedor sombra">
         <Presupuesto v-if="presupuesto === 0" @definir-presupuesto="definirPresupuesto" />
-        <ControlPresupuesto v-else :presupuesto="presupuesto" :disponible="disponible" :gastado="gastado" />
+        <ControlPresupuesto @reset-app="resetApp" v-else :presupuesto="presupuesto" :disponible="disponible"
+          :gastado="gastado" />
       </div>
     </Header>
 
