@@ -1,6 +1,6 @@
 <script setup>
-defineProps(['filtro']);
-defineEmits(['update:filtro']);
+defineProps(['filtro'])
+defineEmits(['update:filtro'])
 </script>
 
 <template>
@@ -8,8 +8,7 @@ defineEmits(['update:filtro']);
         <form>
             <div class="campo">
                 <label for="filtro">Filtrar Gastos</label>
-                <select name="filtro" :value="filtro" @input="$emit('update:filtro', $event.target.value)"
-                    id="filtro">
+                <select name="filtro" :value="filtro" @input="$emit('update:filtro', $event.target.value)" id="filtro">
                     <option value="">-- Seleccione --</option>
                     <option value="ahorro">Ahorro</option>
                     <option value="comida">Comida</option>
