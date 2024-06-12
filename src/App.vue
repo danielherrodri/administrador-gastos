@@ -4,12 +4,14 @@ import Presupuesto from "./components/Presupuesto.vue";
 import Gasto from "./components/Gasto.vue";
 import ControlPresupuesto from "./components/ControlPresupuesto.vue";
 import Modal from './components/Modal.vue';
+import Filtros from './components/Filtros.vue';
 import { generarId } from "./helpers";
 import iconoNuevoGasto from './assets/img/nuevo-gasto.svg'
 
 const presupuesto = ref(0);
 const disponible = ref(0);
 const gastado = ref(0);
+const filtro = ref('');
 
 const gastos = ref([]);
 
@@ -117,6 +119,7 @@ const eliminarGasto = () => {
     </Header>
 
     <main v-if="presupuesto > 0">
+      <Filtros v-model:filtro="filtro" />
       <div class="listado-gastos contenedor">
         <h2>{{ gastos.lenght > 0 ? 'Gastos' : 'No hay gastos' }}</h2>
         <Gasto @seleccionar-gasto="seleccionarGasto" v-for="gasto in gastos" :key="gasto.id" :gasto="gasto" />
