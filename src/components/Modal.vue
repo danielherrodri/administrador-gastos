@@ -5,7 +5,7 @@ import cerrarModal from '../assets/img/cerrar.svg';
 
 const error = ref('')
 
-const emit = defineEmits(['ocultar-modal', 'guardar-gasto', 'update:nombre', 'update:cantidad',
+const emit = defineEmits(['ocultar-modal', 'eliminar-gasto', 'guardar-gasto', 'update:nombre', 'update:cantidad',
     'update:categoria'
 ]);
 const props = defineProps({
@@ -125,7 +125,8 @@ const agregarGasto = () => {
                 </div>
                 <input type="submit" :value="[isEditing ? 'Guardar Cambios' : 'Añadir Gasto']">
             </form>
-            <button type="button" class="btn-eliminar" v-if="isEditing">Eliminar Gasto</button>
+            <button type="button" @click="$emit('eliminar-gasto')" class="btn-eliminar" v-if="isEditing">Eliminar
+                Gasto</button>
         </div>
     </div>
 </template>

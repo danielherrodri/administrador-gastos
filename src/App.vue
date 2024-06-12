@@ -97,6 +97,13 @@ const reiniciarStatetGasto = () => {
     fecha: Date.now()
   })
 }
+
+const eliminarGasto = () => {
+  if (confirm('Eliminar?')) {
+    gastos.value = gastos.value.filter(gastoState => gastoState.id !== gasto.id);
+    ocultarModal()
+  }
+}
 </script>
 
 <template>
@@ -117,9 +124,9 @@ const reiniciarStatetGasto = () => {
       <div class="crear-gasto">
         <img :src="iconoNuevoGasto" alt="Gasto" @click="mostrarModal">
       </div>
-      <Modal v-if="modal.mostrar" @ocultar-modal="ocultarModal" @guardar-gasto="guardarGasto" :modal="modal"
-        v-model:nombre="gasto.nombre" v-model:cantidad="gasto.cantidad" v-model:categoria="gasto.categoria"
-        :disponible="disponible" :id="gasto.id" />
+      <Modal v-if="modal.mostrar" @eliminar-gasto="eliminarGasto" @ocultar-modal="ocultarModal"
+        @guardar-gasto="guardarGasto" :modal="modal" v-model:nombre="gasto.nombre" v-model:cantidad="gasto.cantidad"
+        v-model:categoria="gasto.categoria" :disponible="disponible" :id="gasto.id" />
     </main>
   </div>
 </template>
